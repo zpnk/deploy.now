@@ -3,8 +3,8 @@ import Link from 'next/link'
 
 export default () => (
   <p>
-    deploy.now
+    about deploy.now
     <br />
-    <Link href="/about">about</Link>
+    <Link href="/">home</Link>
   </p>
 )
