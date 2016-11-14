@@ -1,0 +1,13 @@
+{
+  "name": "deploy.now",
+  "private": true,
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "axios": "^0.15.2",
+    "next": "^1.1.1"
+  }
+}
