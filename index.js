@@ -1,20 +1,22 @@
-const url = require('url')
 const server = require('express')()
-const proxy = require('http-proxy').createProxyServer()
+const next = require('./lib/next')
+const api = require('./api')
 
-server.all('/api/?*', (request, response) => {
-  const {pathname, search} = url.parse(request.url)
-  const newPath = pathname.replace('/api', '')
-  const target = `http://localhost:3002${newPath}${search || ''}`
-  proxy.web(request, response, {target, ignorePath: true})
-})
+const SERVER_PORT = 3000
+const NEXT_PORT = 3001
 
-server.all('*', (request, response) => {
-  const {pathname, search} = url.parse(request.url)
-  const target = `http://localhost:3001${pathname}${search || ''}`
-  proxy.web(request, response, {target, ignorePath: true})
-})
+server.use('/api', api)
+server.use('*', next.proxy(NEXT_PORT))
 
-server.listen(3000, () => {
-  console.log('Proxy server ready on http://localhost:3000')
-})
+async function start() {
+  try {
+    await next.start(NEXT_PORT)
+    await server.listen(SERVER_PORT)
+    console.log(`> Ready on http://localhost:${SERVER_PORT}`)
+  } catch(error) {
+    console.error(err)
+    process.exit(1)
+  }
+}
+
+start()

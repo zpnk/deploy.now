@@ -2,17 +2,16 @@
   "name": "deploy.now",
   "private": true,
   "scripts": {
-    "dev": "nf start -j Procfile.dev",
+    "dev": "nodemon --harmony-async-await index.js -i components/ -i pages/",
     "build": "next build",
-    "start": "nf start"
+    "start": "NODE_ENV=production node --harmony-async-await index.js"
   },
   "dependencies": {
     "axios": "^0.15.2",
     "body-parser": "^1.15.2",
     "download-package-tarball": "^1.0.5",
     "express": "^4.14.0",
-    "foreman": "^2.0.0",
-    "http-proxy": "^1.15.2",
+    "http-proxy-middleware": "^0.17.2",
     "next": "^1.1.1",
     "now": "latest",
     "parse-github-url": "^0.3.2"

@@ -1,3 +1,0 @@
-web:   ./node_modules/.bin/next -p 3001
-api:   nodemon --harmony-async-await ./api --watch ./api
-proxy: nodemon index.js --watch index.js

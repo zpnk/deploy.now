@@ -4,6 +4,10 @@ const deploy = require('../lib/deploy')
 
 api.use(bodyParser.json())
 
+api.get('/', (req, res) => {
+  res.send({msg: 'hi'})
+})
+
 api.post('/deploy', async (request, response) => {
   try {
     const {repo, zeitToken, envs} = request.body
@@ -18,6 +22,4 @@ api.post('/deploy', async (request, response) => {
   }
 })
 
-api.listen(3002, () => {
-  console.log('API server ready on http://localhost:3002')
-})
+module.exports = api
