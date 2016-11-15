@@ -56,10 +56,10 @@ export default class extends React.Component {
 
     return (
       <main>
-        <Header title='Deploy to now' />
+        <Header title='Now: deploy instantly' />
 
-        <h2 className={styles.title}>
-          ## Deploy to <a href="https://now.sh">now</a>
+        <h2 className={styles.quote}>
+          > One click deploys to <a href="https://now.sh">△ now</a>
         </h2>
 
         { query.repo && !_errors.repo ?
@@ -99,8 +99,9 @@ export default class extends React.Component {
 }
 
 const styles = {
-  title: style({
+  quote: style({
     fontSize: '12px',
-    fontWeight: 700,
+    fontWeight: 100,
+    fontStyle: 'italic'
   })
 }

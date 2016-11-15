@@ -9,6 +9,8 @@ export default () => (
       <a href="https://github.com/zpnk">@zpnk</a>
     </span>
     <span>
+      powered by <a href="https://now.sh">△ now</a>
+      {' '}|{' '}
       <a href="https://github.com/zpnk/stage.sh">source</a>
     </span>
   </footer>
