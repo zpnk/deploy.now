@@ -1,9 +1,23 @@
-const app = require('express')()
+const api = require('express')()
+const bodyParser = require('body-parser')
+const deploy = require('../lib/deploy')
 
-app.get('/', (request, response) => {
-  response.json({message: 'hello there'})
+api.use(bodyParser.json())
+
+api.post('/deploy', async (request, response) => {
+  try {
+    const {repo, zeitToken, envs} = request.body
+
+    const url = await deploy(repo, zeitToken, envs)
+
+    response.json({url})
+  } catch(error) {
+    response.status(500).json({
+      error: JSON.stringify(error.message)
+    })
+  }
 })
 
-app.listen(3002, () => {
+api.listen(3002, () => {
   console.log('API server ready on http://localhost:3002')
 })

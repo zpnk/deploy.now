@@ -17,12 +17,6 @@ export default class extends React.Component {
     }
   }
 
-  static async getInitialProps() {
-    return {
-      deployService: process.env.DEPLOY_SERVICE
-    }
-  }
-
   componentWillMount() {
     const {query} = this.props.url
 
@@ -36,14 +30,14 @@ export default class extends React.Component {
   deploy = async ({repo, zeitToken, envs}) => {
     this.setState({deploying: true})
 
-    const { deployService, url: {query} } = this.props
+    const { url: {query} } = this.props
 
     if (isRepoUrl(query.repo)) {
       repo = query.repo
     }
 
     try {
-      const deploy = await axios.post(deployService, {repo, zeitToken, envs})
+      const deploy = await axios.post('/api/deploy', {repo, zeitToken, envs})
 
       this.setState({deployedUrl: deploy.data.url, deploying: false})
     } catch(error) {
