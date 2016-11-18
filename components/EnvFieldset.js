@@ -1,43 +1,16 @@
-import React from 'react'
-import {style} from 'next/css'
-import Field from '../components/Field'
-import Label from '../components/Label'
-import Input from '../components/Input'
-import Hint from '../components/Hint'
-import Button from '../components/Button'
-
-export default ({env, index, onChange, onRemove, error}) => (
-  <div>
-    <Field error={error}>
-      <Input name={`${index}.key`}
-        value={env.key}
-        onChange={onChange}
-        placeholder={`ENV_VAR_${index+1}`}
-        error={error}
-        {...styles.key({error})} />
-
-      <div {...styles.equals}>=</div>
-
-      <Input name={`${index}.value`}
-        value={env.value}
-        onChange={onChange}
-        placeholder='value'
-        error={error}
-        {...styles.value} />
-    </Field>
-
-    <Button onClick={onRemove} {...styles.btn}>-</Button>
-
-    <Hint error={error} {...styles.hint} />
-  </div>
-)
+import React, {PropTypes} from 'react';
+import {style} from 'next/css';
+import Field from '../components/Field';
+import Input from '../components/Input';
+import Hint from '../components/Hint';
+import Button from '../components/Button';
 
 const styles = {
   key: ({error}) => style({
-    color: error ? '#f00' : '#dbcb00',
-    fontSize: '11px',
-    fontWeight: 700,
-    width: '100px',
+    'color': error ? '#f00' : '#dbcb00',
+    'fontSize': '11px',
+    'fontWeight': 700,
+    'width': '100px',
     '::-webkit-input-placeholder': {
       color: error ? '#f00' : '#dbcb00'
     }
@@ -60,4 +33,40 @@ const styles = {
   hint: style({
     marginLeft: '15px !important'
   })
-}
+};
+
+const EnvFieldset = ({env, index, onChange, onRemove, error}) => (
+  <div>
+    <Field error={error}>
+      <Input name={`${index}.key`}
+        value={env.key}
+        onChange={onChange}
+        placeholder={`ENV_VAR_${index+1}`}
+        error={error}
+        {...styles.key({error})} />
+
+      <div {...styles.equals}>=</div>
+
+      <Input name={`${index}.value`}
+        value={env.value}
+        onChange={onChange}
+        placeholder="value"
+        error={error}
+        {...styles.value} />
+    </Field>
+
+    <Button onClick={onRemove} {...styles.btn}>-</Button>
+
+    <Hint error={error} {...styles.hint} />
+  </div>
+);
+
+EnvFieldset.propTypes = {
+  env: PropTypes.object,
+  index: PropTypes.number,
+  onChange: PropTypes.func,
+  onRemove: PropTypes.func,
+  error: PropTypes.string
+};
+
+export default EnvFieldset;

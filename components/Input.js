@@ -1,10 +1,5 @@
-import React from 'react'
-import {style} from 'next/css'
-
-export default ({error, ...props}) => (
-  <input {...props}
-    className={styles({error})} />
-)
+import React, {PropTypes} from 'react';
+import {style} from 'next/css';
 
 const styles = ({error}) => style({
   WebkitAppearance: 'none',
@@ -18,4 +13,15 @@ const styles = ({error}) => style({
   outline: 'none',
   width: '252px',
   height: '35px'
-})
+});
+
+const Input = ({error, ...props}) => (
+  <input {...props}
+    className={styles({error})} />
+);
+
+Input.propTypes = {
+  error: PropTypes.string
+};
+
+export default Input;

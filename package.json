@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "nodemon --harmony-async-await index.js -i components/ -i pages/",
     "build": "next build",
-    "start": "NODE_ENV=production node --harmony-async-await index.js"
+    "start": "NODE_ENV=production node --harmony-async-await index.js",
+    "test": "xo"
   },
   "dependencies": {
     "axios": "^0.15.2",
@@ -14,9 +15,77 @@
     "http-proxy-middleware": "^0.17.2",
     "next": "^1.1.1",
     "now": "latest",
-    "parse-github-url": "^0.3.2"
+    "parse-github-url": "^0.3.2",
+    "react": "^15.4.0"
   },
   "devDependencies": {
-    "nodemon": "^1.11.0"
+    "babel-eslint": "^7.1.1",
+    "eslint-config-xo-react": "^0.10.0",
+    "eslint-plugin-react": "^6.7.1",
+    "nodemon": "^1.11.0",
+    "xo": "^0.17.1"
+  },
+  "xo": {
+    "parser": "babel-eslint",
+    "extends": "xo-react",
+    "esnext": true,
+    "space": true,
+    "rules": {
+      "no-warning-comments": "warn",
+      "space-infix-ops": 0,
+      "one-var": [
+        "error",
+        {
+          "uninitialized": "always",
+          "initialized": "never"
+        }
+      ],
+      "max-statements-per-line": [
+        "error",
+        {
+          "max": 2
+        }
+      ],
+      "brace-style": [
+        "error",
+        "1tbs",
+        {
+          "allowSingleLine": true
+        }
+      ],
+      "curly": [
+        "error",
+        "multi",
+        "consistent"
+      ],
+      "quote-props": [
+        "error",
+        "consistent"
+      ],
+      "arrow-parens": [
+        "error",
+        "always"
+      ],
+      "unicorn/catch-error-name": [
+        "error",
+        {
+          "name": "error"
+        }
+      ],
+      "unicorn/filename-case": 0,
+      "react/jsx-first-prop-new-line": 0,
+      "react/jsx-closing-bracket-location": 0,
+      "react/jsx-space-before-closing": [
+        "error",
+        "always"
+      ],
+      "react/jsx-no-bind": [
+        "error",
+        {
+          "ignoreRefs": true,
+          "allowArrowFunctions": true
+        }
+      ]
+    }
   }
 }
