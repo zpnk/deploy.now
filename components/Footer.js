@@ -23,7 +23,7 @@ export default () => (
     <span>
       powered by <a href="https://now.sh">△ now</a>
       {' '}|{' '}
-      <a href="https://github.com/zpnk/stage.sh">source</a>
+      <a href="https://github.com/zpnk/deploy.now">source</a>
     </span>
   </footer>
 );
