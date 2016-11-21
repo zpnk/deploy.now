@@ -4,6 +4,7 @@ import axios from 'axios';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Form from '../components/Form';
+import Usage from '../components/Usage';
 import {isRepoUrl} from '../lib/validate';
 
 const styles = {
@@ -92,6 +93,8 @@ export default class Index extends React.Component {
             needRepo={!query.repo || _errors.repo}
             onSubmit={this.handleDeploy} />
         )}
+
+        <Usage />
 
         <Footer />
       </main>
