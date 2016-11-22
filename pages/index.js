@@ -90,7 +90,7 @@ export default class Index extends React.Component {
 
         {(!deployedUrl && !deploying) && (
           <Form initialEnvs={query.env}
-            needRepo={!query.repo || _errors.repo}
+            needRepo={!query.repo || Boolean(_errors.repo)}
             onSubmit={this.handleDeploy} />
         )}
 
