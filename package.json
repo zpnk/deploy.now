@@ -14,7 +14,6 @@
     "download-package-tarball": "^1.0.5",
     "express": "^4.14.0",
     "http-proxy-middleware": "^0.17.2",
-    "husky": "^0.11.9",
     "next": "^1.1.1",
     "now": "latest",
     "parse-github-url": "^0.3.2"
@@ -23,6 +22,7 @@
     "babel-eslint": "^7.1.1",
     "eslint-config-xo-react": "^0.10.0",
     "eslint-plugin-react": "^6.7.1",
+    "husky": "^0.11.9",
     "nodemon": "^1.11.0",
     "xo": "^0.17.1"
   },
