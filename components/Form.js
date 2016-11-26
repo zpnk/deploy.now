@@ -22,20 +22,18 @@ export default class Form extends React.Component {
     onSubmit: PropTypes.func
   }
 
-  buildEnvs = (initial='') => {
-    let defaults = [
-      {key: '', value: ''},
-      {key: '', value: ''},
-      {key: '', value: ''}
-    ];
+  buildEnvs = (initial) => {
+    let defaults = [{}, {}, {}];
 
-    if (initial.constructor === String) defaults[0].key = initial;
+    if (!initial) return defaults;
+
+    if (initial.constructor === String)
+      defaults = [{key: initial, required: true}];
+
     if (initial.constructor === Array)
       defaults = initial.map((env) => {
-        return {key: env, value: ''};
+        return {key: env, required: true};
       });
-
-    if (defaults.length < 3) defaults.push({key: '', value: ''});
 
     return defaults;
   }

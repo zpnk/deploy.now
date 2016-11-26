@@ -30,8 +30,8 @@ const styles = {
     margin: '5px 0 0 15px !important',
     boxSizing: 'border-box'
   }),
-  hint: style({
-    marginLeft: '15px !important'
+  hint: ({required}) => style({
+    marginLeft: `${required ? 55 : 15}px !important`
   })
 };
 
@@ -55,9 +55,11 @@ const EnvFieldset = ({env, index, onChange, onRemove, error}) => (
         {...styles.value} />
     </Field>
 
-    <Button onClick={onRemove} {...styles.btn}>-</Button>
+    {!env.required && (
+      <Button onClick={onRemove} {...styles.btn}>-</Button>
+    )}
 
-    <Hint error={error} {...styles.hint} />
+    <Hint error={error} {...styles.hint({required: env.required})} />
   </div>
 );
 
