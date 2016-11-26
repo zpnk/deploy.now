@@ -10,7 +10,7 @@ const styles = {
     'color': error ? '#f00' : '#dbcb00',
     'fontSize': '11px',
     'fontWeight': 700,
-    'width': '100px',
+    'width': '120px',
     '::-webkit-input-placeholder': {
       color: error ? '#f00' : '#dbcb00'
     }

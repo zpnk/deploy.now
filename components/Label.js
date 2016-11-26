@@ -8,7 +8,7 @@ const styles = ({error}) => style({
   fontWeight: 700,
   textTransform: 'uppercase',
   marginRight: '2px',
-  width: '100px'
+  width: '120px'
 });
 
 const Label = ({htmlFor, text, error}) => (

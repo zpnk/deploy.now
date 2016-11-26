@@ -96,14 +96,14 @@ export default class Form extends React.Component {
         )}
 
         <TextFieldset name="zeitToken"
-          label="zeit token"
+          label="zeit api token"
           value={zeitToken}
           placeholder="xxxxxxxxxxxxxxxxxxxxxxxx"
           onChange={onChange}
           error={err.zeitToken}
           hint={
             <span>
-              Create a new API token <a href="https://zeit.co/account#api-tokens">
+              Create a new token <a href="https://zeit.co/account#api-tokens">
               here</a>
             </span>
           } />
