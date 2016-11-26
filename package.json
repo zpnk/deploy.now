@@ -5,7 +5,8 @@
     "dev": "nodemon --harmony-async-await index.js -i components/ -i pages/",
     "build": "next build",
     "start": "NODE_ENV=production node --harmony-async-await index.js",
-    "test": "xo"
+    "test": "xo",
+    "precommit": "npm test -s"
   },
   "dependencies": {
     "axios": "^0.15.2",
@@ -13,6 +14,7 @@
     "download-package-tarball": "^1.0.5",
     "express": "^4.14.0",
     "http-proxy-middleware": "^0.17.2",
+    "husky": "^0.11.9",
     "next": "^1.1.1",
     "now": "latest",
     "parse-github-url": "^0.3.2"
@@ -29,6 +31,11 @@
     "extends": "xo-react",
     "esnext": true,
     "space": true,
+    "settings": {
+      "import/core-modules": [
+        "react"
+      ]
+    },
     "rules": {
       "no-warning-comments": "warn",
       "space-infix-ops": 0,
