@@ -19,31 +19,32 @@ export default class Form extends React.Component {
   static propTypes = {
     initialEnvs: PropTypes.node,
     needRepo: PropTypes.bool,
+    precheckDocker: PropTypes.bool,
     onSubmit: PropTypes.func
   }
 
   buildEnvs = (initial) => {
-    let defaults = [{}, {}, {}];
+    let defaults = new Array(3).fill({key: '', value: ''});
 
     if (!initial) return defaults;
 
     if (initial.constructor === String)
-      defaults = [{key: initial, required: true}];
+      defaults = [{key: initial, value: '', required: true}];
 
     if (initial.constructor === Array)
       defaults = initial.map((env) => {
-        return {key: env, required: true};
+        return {key: env, value: '', required: true};
       });
 
     return defaults;
   }
 
-  onChange = (e) => {
-    const {name, value} = e.target;
+  handleChange = ({target}) => {
+    const {name, value} = target;
     this.setState({[name]: value});
   }
 
-  setEnv = (e) => {
+  handleSetEnv = (e) => {
     const {name, value} = e.target;
     const {envs} = this.state;
     const [index, field] = name.split('.');
@@ -51,19 +52,25 @@ export default class Form extends React.Component {
     this.setState({envs});
   }
 
-  addEnvField = () => {
+  handleAddEnvField = () => {
     let {envs} = this.state;
     envs = envs.concat({key: '', value: ''});
     this.setState({envs});
   }
 
-  removeEnvField = (index) => () => {
+  handleRemoveEnvField = (index) => () => {
     let {envs} = this.state;
     envs = envs.filter((el, idx) => idx!==index);
     this.setState({envs});
   }
 
-  submit = () => {
+  handleSetDocker = ({target}) => {
+    if (this.props.precheckDocker) return true; // already set.
+    const {name, checked} = target;
+    this.setState({[name]: checked});
+  }
+
+  handleSubmit = () => {
     const form = this.state;
     const {needRepo} = this.props;
 
@@ -77,9 +84,8 @@ export default class Form extends React.Component {
   }
 
   render() {
-    const {onChange, setEnv, addEnvField, removeEnvField, submit} = this;
-    const {needRepo} = this.props;
-    const {repo, zeitToken, envs, _errors: err} = this.state;
+    const {needRepo, precheckDocker} = this.props;
+    const {repo, zeitToken, useDocker, envs, _errors: err} = this.state;
 
     return (
       <div>
@@ -88,7 +94,7 @@ export default class Form extends React.Component {
             label="github repo"
             value={repo}
             placeholder="https://github.com/zeit/zeitgram"
-            onChange={onChange}
+            onChange={this.handleChange}
             error={err.repo}
             hint="URL to a GitHub repo" />
         )}
@@ -97,7 +103,7 @@ export default class Form extends React.Component {
           label="zeit api token"
           value={zeitToken}
           placeholder="xxxxxxxxxxxxxxxxxxxxxxxx"
-          onChange={onChange}
+          onChange={this.handleChange}
           error={err.zeitToken}
           hint={
             <span>
@@ -111,17 +117,26 @@ export default class Form extends React.Component {
             <EnvFieldset env={env}
               key={index}
               index={index}
-              onChange={setEnv}
-              onRemove={removeEnvField(index)}
+              onChange={this.handleSetEnv}
+              onRemove={this.handleRemoveEnvField(index)}
               error={err['env'+index]} />
           );
         })}
 
-        <Button onClick={addEnvField}>
+        <Button onClick={this.handleAddEnvField}>
           Add environment variable
         </Button>
 
-        <Button onClick={submit}>
+        <label>
+          <input type="checkbox"
+            name="useDocker"
+            value={useDocker}
+            onChange={this.handleSetDocker}
+            checked={precheckDocker} />
+          Build using Docker
+        </label>
+
+        <Button onClick={this.handleSubmit}>
           DEPLOY
         </Button>
       </div>

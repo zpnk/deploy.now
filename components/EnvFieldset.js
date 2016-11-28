@@ -40,6 +40,7 @@ const EnvFieldset = ({env, index, onChange, onRemove, error}) => (
     <Field error={error}>
       <Input name={`${index}.key`}
         value={env.key}
+        type="text"
         onChange={onChange}
         placeholder={`ENV_VAR_${index+1}`}
         error={error}
@@ -49,6 +50,7 @@ const EnvFieldset = ({env, index, onChange, onRemove, error}) => (
 
       <Input name={`${index}.value`}
         value={env.value}
+        type="text"
         onChange={onChange}
         placeholder="value"
         error={error}
