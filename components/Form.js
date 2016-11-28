@@ -19,7 +19,7 @@ export default class Form extends React.Component {
   static propTypes = {
     initialEnvs: PropTypes.node,
     needRepo: PropTypes.bool,
-    precheckDocker: PropTypes.bool,
+    defaultDocker: PropTypes.bool,
     onSubmit: PropTypes.func
   }
 
@@ -65,7 +65,7 @@ export default class Form extends React.Component {
   }
 
   handleSetDocker = ({target}) => {
-    if (this.props.precheckDocker) return true; // already set.
+    if (this.props.defaultDocker) return true; // already set.
     const {name, checked} = target;
     this.setState({[name]: checked});
   }
@@ -84,7 +84,7 @@ export default class Form extends React.Component {
   }
 
   render() {
-    const {needRepo, precheckDocker} = this.props;
+    const {needRepo, defaultDocker} = this.props;
     const {repo, zeitToken, useDocker, envs, _errors: err} = this.state;
 
     return (
@@ -132,7 +132,7 @@ export default class Form extends React.Component {
             name="useDocker"
             value={useDocker}
             onChange={this.handleSetDocker}
-            checked={precheckDocker} />
+            checked={defaultDocker} />
           Build using Docker
         </label>
 

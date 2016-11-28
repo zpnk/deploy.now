@@ -103,7 +103,7 @@ export default class Index extends React.Component {
         {(!deployedUrl && !deploying) && (
           <Form initialEnvs={query.env}
             needRepo={!query.repo || Boolean(_errors.repo)}
-            precheckDocker={Boolean(query.docker)}
+            defaultDocker={Boolean(query.docker)}
             onSubmit={this.handleDeploy} />
         )}
 
