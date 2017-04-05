@@ -35,15 +35,16 @@ export default class Index extends React.Component {
       }});
   }
 
-  handleDeploy = async ({repo, zeitToken, envs}) => {
+  handleDeploy = async ({repo, directory, zeitToken, envs}) => {
     this.setState({deploying: true});
 
     const {url: {query}} = this.props;
 
     if (isRepoUrl(query.repo)) repo = query.repo;
+    if (query.directory) directory = query.directory;
 
     try {
-      const deploy = await axios.post('/api/deploy', {repo, zeitToken, envs});
+      const deploy = await axios.post('/api/deploy', {repo, directory, zeitToken, envs});
 
       this.setState({deployedUrl: deploy.data.url, deploying: false});
     } catch (error) {
@@ -70,7 +71,7 @@ export default class Index extends React.Component {
 
         {(query.repo && !_errors.repo) && (
           <p>
-            Deploying <a href={query.repo}>{query.repo.split('.com/')[1]}</a>
+            Deploying {query.directory ? `${query.directory} directory in ` : ''}<a href={query.repo}>{query.repo.split('.com/')[1]}</a>
           </p>
         )}
 
@@ -91,6 +92,7 @@ export default class Index extends React.Component {
         {(!deployedUrl && !deploying) && (
           <Form initialEnvs={query.env}
             needRepo={!query.repo || Boolean(_errors.repo)}
+            hasDirectory={query.directory}
             onSubmit={this.handleDeploy} />
         )}
 

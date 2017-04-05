@@ -10,6 +10,7 @@ export default class Form extends React.Component {
 
     this.state = {
       repo: '',
+      directory: '',
       zeitToken: '',
       envs: this.buildEnvs(props.initialEnvs),
       _errors: {}
@@ -19,6 +20,7 @@ export default class Form extends React.Component {
   static propTypes = {
     initialEnvs: PropTypes.node,
     needRepo: PropTypes.bool,
+    hasDirectory: PropTypes.bool,
     onSubmit: PropTypes.func
   }
 
@@ -78,8 +80,8 @@ export default class Form extends React.Component {
 
   render() {
     const {onChange, setEnv, addEnvField, removeEnvField, submit} = this;
-    const {needRepo} = this.props;
-    const {repo, zeitToken, envs, _errors: err} = this.state;
+    const {needRepo, hasDirectory} = this.props;
+    const {repo, directory, zeitToken, envs, _errors: err} = this.state;
 
     return (
       <div>
@@ -91,6 +93,16 @@ export default class Form extends React.Component {
             onChange={onChange}
             error={err.repo}
             hint="URL to a GitHub repo" />
+        )}
+
+        {!hasDirectory && (
+          <TextFieldset name="directory"
+            label="directory to deploy"
+            value={directory}
+            placeholder="example/app"
+            onChange={onChange}
+            error={err.directory}
+            hint="path to directory to deploy" />
         )}
 
         <TextFieldset name="zeitToken"

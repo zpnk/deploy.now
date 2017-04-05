@@ -10,9 +10,9 @@ api.get('/', (req, res) => {
 
 api.post('/deploy', async (request, response) => {
   try {
-    const {repo, zeitToken, envs} = request.body;
+    const {repo, directory, zeitToken, envs} = request.body;
 
-    const url = await deploy(repo, zeitToken, envs);
+    const url = await deploy(repo, directory, zeitToken, envs);
 
     response.json({url});
   } catch (error) {
