@@ -6,6 +6,7 @@ import Footer from '../components/Footer';
 import Form from '../components/Form';
 import Usage from '../components/Usage';
 import {isRepoUrl} from '../lib/validate';
+import parseRepoURL from '../lib/parse-repo-url';
 
 const styles = {
   quote: style({
@@ -58,6 +59,7 @@ export default class Index extends React.Component {
 
   render() {
     const {query} = this.props.url;
+    const {repoName, repoURL, repoBranch, branchDirectory} = parseRepoURL(query.repo);
     const {deploying, deployedUrl, _errors} = this.state;
 
     return (
@@ -70,7 +72,7 @@ export default class Index extends React.Component {
 
         {(query.repo && !_errors.repo) && (
           <p>
-            Deploying <a href={query.repo}>{query.repo.split('.com/')[1]}</a>
+            Deploying {branchDirectory ? `${branchDirectory} directory in ` : ''}{repoBranch ? `${repoBranch} branch of ` : ''}<a href={repoURL}>{repoName}</a>
           </p>
         )}
 
