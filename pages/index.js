@@ -59,7 +59,7 @@ export default class Index extends React.Component {
 
   render() {
     const {query} = this.props.url;
-    const {repoName, repoURL, repoBranch, branchDirectory} = parseRepoURL(query.repo);
+    const {repoName, repoURL, repoBranch, branchDirectory} = query.repo ? parseRepoURL(query.repo) : {};
     const {deploying, deployedUrl, _errors} = this.state;
 
     return (
