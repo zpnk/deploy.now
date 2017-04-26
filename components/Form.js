@@ -101,7 +101,7 @@ export default class Form extends React.Component {
           error={err.zeitToken}
           hint={
             <span>
-              Create a new token <a href="https://zeit.co/account#api-tokens">
+              Create a new token <a href="https://zeit.co/account/tokens">
               here</a>
             </span>
           } />
