@@ -36,17 +36,27 @@ export default class Index extends React.Component {
       }});
   }
 
-  handleDeploy = async ({repo, zeitToken, envs}) => {
+  handleDeploy = async ({repo, zeitToken, useDocker, envs}) => {
     this.setState({deploying: true});
 
     const {url: {query}} = this.props;
 
+    if (query.docker) useDocker = true;
     if (isRepoUrl(query.repo)) repo = query.repo;
 
     try {
-      const deploy = await axios.post('/api/deploy', {repo, zeitToken, envs});
+      const deployment = {
+        repo,
+        config: {
+          token: zeitToken,
+          docker: useDocker,
+          envs
+        }
+      };
 
-      this.setState({deployedUrl: deploy.data.url, deploying: false});
+      const {data: {url}} = await axios.post('/api/deploy', deployment);
+
+      this.setState({deployedUrl: url, deploying: false});
     } catch (error) {
       this.setState({
         _errors: {
@@ -93,6 +103,7 @@ export default class Index extends React.Component {
         {(!deployedUrl && !deploying) && (
           <Form initialEnvs={query.env}
             needRepo={!query.repo || Boolean(_errors.repo)}
+            defaultDocker={Boolean(query.docker)}
             onSubmit={this.handleDeploy} />
         )}
 
