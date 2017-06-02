@@ -2,9 +2,9 @@
   "name": "deploy.now",
   "private": true,
   "scripts": {
-    "dev": "nodemon --harmony-async-await index.js -i components/ -i pages/",
+    "dev": "nodemon index.js -i components/ -i pages/",
     "build": "next build",
-    "start": "NODE_ENV=production node --harmony-async-await index.js",
+    "start": "NODE_ENV=production node index.js",
     "test": "xo",
     "precommit": "npm test -s"
   },
