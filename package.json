@@ -1,6 +1,9 @@
 {
   "name": "deploy.now",
   "private": true,
+  "engines": {
+    "node": "8.0.x"
+  },
   "scripts": {
     "dev": "nodemon index.js -i components/ -i pages/",
     "build": "next build",
