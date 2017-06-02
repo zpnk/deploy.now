@@ -11,6 +11,7 @@ export default class Form extends React.Component {
     this.state = {
       repo: '',
       zeitToken: '',
+      useDocker: false,
       envs: this.buildEnvs(props.initialEnvs),
       _errors: {}
     };
@@ -24,7 +25,11 @@ export default class Form extends React.Component {
   }
 
   buildEnvs = (initial) => {
-    let defaults = new Array(3).fill({key: '', value: ''});
+    let defaults = [
+      {key: '', value: ''},
+      {key: '', value: ''},
+      {key: '', value: ''}
+    ];
 
     if (!initial) return defaults;
 
@@ -132,7 +137,7 @@ export default class Form extends React.Component {
             name="useDocker"
             value={useDocker}
             onChange={this.handleSetDocker}
-            checked={defaultDocker} />
+            checked={useDocker || defaultDocker} />
           Build using Docker
         </label>
 
