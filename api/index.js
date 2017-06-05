@@ -16,6 +16,7 @@ api.post('/deploy', async (request, response) => {
 
     response.json({url});
   } catch (error) {
+    console.error(`> Deployment failed ${error.message}`);
     response.status(500).json({
       error: JSON.stringify(error.message)
     });
