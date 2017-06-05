@@ -18,7 +18,7 @@
     "express": "^4.14.0",
     "http-proxy-middleware": "^0.17.2",
     "next": "^1.1.1",
-    "now": "latest",
+    "now": "^6.3.1",
     "parse-github-url": "^0.3.2",
     "react": "^15.5.4"
   },
