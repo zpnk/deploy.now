@@ -25,23 +25,15 @@ export default class Form extends React.Component {
   }
 
   buildEnvs = (initial) => {
-    let defaults = [
-      {key: '', value: ''},
-      {key: '', value: ''},
-      {key: '', value: ''}
-    ];
-
-    if (!initial) return defaults;
+    if (!initial) return [];
 
     if (initial.constructor === String)
-      defaults = [{key: initial, value: '', required: true}];
+      return [{key: initial, value: '', required: true}];
 
     if (initial.constructor === Array)
-      defaults = initial.map((env) => {
+      return initial.map((env) => {
         return {key: env, value: '', required: true};
       });
-
-    return defaults;
   }
 
   handleChange = ({target}) => {
