@@ -1,8 +1,9 @@
 # deploy.now
 
-> One click deploys to [**△ now**](https://now.sh)
+> One click deploys to [**△ Vercel**](https://vercel.com/)
 
 This is the app that powers [deploy.now.sh](https://deploy.now.sh).
+<!-- deploy.now.sh is not working  -->
 
 ## Development
 
